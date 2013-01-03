@@ -1,0 +1,30 @@
+{
+  "name": "expandol",
+  "version": "0.0.0",
+  "description": "Expand shortened urls.",
+  "main": "./lib/expandol.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "coffee -o lib -c src/*.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pebbol/expandol.git"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "bin": {
+    "expandol": "./lib/expandol.js"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "expand"
+  ],
+  "author": "Colin Ross <colin@colinscape.com> (http://colinscape.com)",
+  "license": "BSD",
+  "dependencies": {
+    "request": "~2.12.0"
+  }
+}
