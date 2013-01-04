@@ -1,6 +1,6 @@
 {
   "name": "expandol",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Expand shortened urls.",
   "main": "./lib/expandol.js",
   "scripts": {
