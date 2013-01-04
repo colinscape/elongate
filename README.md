@@ -25,7 +25,7 @@ Or from source:
 If you installed it globally:
 
 <pre>
-  expandol http://bit.ly/TAA2AL
+  $ expandol http://bit.ly/TAA2AL
 </pre>
 
 If installed as a library:
@@ -60,7 +60,7 @@ Or, as JavaScript:
   var expandol = require('expandol')
 
   expandol('http://bit.ly/TAA2AL', function(err, destination_url, all_urls) {
-    for (var i=0; i < all_urls.length; ++i) {
+    for (var i=0; i &lt; all_urls.length; ++i) {
       console.log(all_urls[i]);  
     }
   });
