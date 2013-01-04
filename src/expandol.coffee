@@ -1,3 +1,5 @@
+#! /usr/bin/env coffee
+
 request = require 'request'
 url = require 'url'
 
@@ -30,5 +32,4 @@ if not module.parent?
   short_url = process.argv[2]
   expandol short_url, (err, destination_url, all_urls) ->
     if err? then return console.log "ERROR: #{err}"
-    console.log "Final url: #{destination_url}"
-    console.log "Route: #{all_urls.join ' -> '}"
+    console.log destination_url

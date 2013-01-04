@@ -5,7 +5,7 @@
   "main": "./lib/expandol.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "coffee -o lib -c src/*.coffee"
+    "prepublish": "coffee -o lib -c src/*.coffee; cat ./misc/header.js ./lib/expandol.js > ./lib/main.js"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
     "lib": "./lib"
   },
   "bin": {
-    "expandol": "./lib/expandol.js"
+    "expandol": "./lib/main.js"
   },
   "keywords": [
     "url",
