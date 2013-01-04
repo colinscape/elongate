@@ -2,7 +2,7 @@
   "name": "expandol",
   "version": "0.1.0",
   "description": "Expand shortened urls.",
-  "main": "./lib/expandol.js",
+  "main": "./lib/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "coffee -o lib -c src/*.coffee; cat ./misc/header.js ./lib/expandol.js > ./lib/main.js"
