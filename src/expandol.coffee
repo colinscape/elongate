@@ -31,7 +31,9 @@ internal = (short_url, history, cb) ->
 
     # If we are to redirect, go recursive.
     if resp.statusCode >= 300 and resp.statusCode < 400
-      return internal resp.headers.location, history, cb
+      location = resp.headers.location
+      if location in history then return cb "Redirect loop"
+      return internal location, history, cb
 
     # We get here, we are at the end of the redirections.
     destination_url = resp.request.href
