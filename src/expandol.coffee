@@ -7,10 +7,15 @@ expandol = (short_url, cb) ->
   
   parsed_url = url.parse short_url
 
+  userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.101 Safari/537.11'
+  if parsed_url.host is 't.co' then userAgent = null
+
   options =
     pool: false
+    followRedirect: true
+    maxRedirects: 50
     headers:
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.101 Safari/537.11'
+      'User-Agent': userAgent
     url: parsed_url
 
   request.get options, (err, resp, body) ->
