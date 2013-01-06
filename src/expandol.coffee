@@ -8,6 +8,9 @@ expandol = (short_url, cb) ->
   parsed_url = url.parse short_url
 
   options =
+    pool: false
+    headers:
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.101 Safari/537.11'
     url: parsed_url
 
   request.get options, (err, resp, body) ->
