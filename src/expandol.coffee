@@ -3,17 +3,24 @@
 request = require 'request'
 url = require 'url'
 
-expandol = (short_url, cb) ->
-  
+# The worker function that does the heavy lifting.
+internal = (short_url, history, cb) ->
+
+  history.push short_url
   parsed_url = url.parse short_url
 
+  # Need a browser User-Agent for facebook.
+  # However need a non-browser User-Agent for t.co urls.
+  # Let's pretend to be a browser unless otherwise necessary.
   userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.101 Safari/537.11'
   if parsed_url.host is 't.co' then userAgent = null
 
+  # We don't pool so we can make more requests.
+  # Don't follow redirects as we do that ourselves so we can change the
+  #   User-Agent if need be between requests.
   options =
     pool: false
-    followRedirect: true
-    maxRedirects: 50
+    followRedirect: false
     headers:
       'User-Agent': userAgent
     url: parsed_url
@@ -22,17 +29,23 @@ expandol = (short_url, cb) ->
 
     if err? then return cb err
 
+    # If we are to redirect, go recursive.
+    if resp.statusCode >= 300 and resp.statusCode < 400
+      return internal resp.headers.location, history, cb
+
+    # We get here, we are at the end of the redirections.
     destination_url = resp.request.href
-    redirects = resp.request.redirects
-    nRedirects = resp.request.redirects.length
+    history.push destination_url
 
-    # Create complete route, based on the redirects, the destination
-    # and the original.
-    all_urls = (redirect.redirectUri for redirect in redirects.slice 0, nRedirects-1)
-    all_urls.push destination_url
-    all_urls.unshift short_url
+    cb null, destination_url, history
 
-    cb null, destination_url, all_urls
+#============================================================================
+
+# The function we expose.
+expandol = (short_url, cb) ->
+  return internal short_url, [], cb
+
+#============================================================================
 
 module.exports = expandol
 
