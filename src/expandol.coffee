@@ -20,6 +20,7 @@ internal = (short_url, history, cb) ->
   #   User-Agent if need be between requests.
   options =
     pool: false
+    jar: false
     followRedirect: false
     headers:
       'User-Agent': userAgent
