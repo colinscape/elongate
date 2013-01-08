@@ -16,11 +16,13 @@ internal = (short_url, history, cb) ->
   if parsed_url.host is 't.co' then userAgent = null
 
   # We don't pool so we can make more requests.
+  # Don't use a cookie jar else it soon gets all full of rubbish.
   # Don't follow redirects as we do that ourselves so we can change the
   #   User-Agent if need be between requests.
   options =
     pool: false
     jar: false
+    encoding: 'utf8'
     followRedirect: false
     headers:
       'User-Agent': userAgent
