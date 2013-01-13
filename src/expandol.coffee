@@ -13,7 +13,7 @@ internal = (short_url, history, cb) ->
   # However need a non-browser User-Agent for t.co urls.
   # Let's pretend to be a browser unless otherwise necessary.
   userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.101 Safari/537.11'
-  if parsed_url.host is 't.co' then userAgent = null
+  if parsed_url.host in ['t.co', 'mlad.co'] then userAgent = null
 
   # We don't pool so we can make more requests.
   # Don't use a cookie jar else it soon gets all full of rubbish.
