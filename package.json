@@ -1,6 +1,6 @@
 {
   "name": "elongate",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Expand shortened urls.",
   "main": "./lib/main.js",
   "scripts": {
