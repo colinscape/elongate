@@ -16,6 +16,6 @@ task 'add-header', 'Add shebang to compiled JavaScript for use as script.', (opt
     proc.stderr.on  'data', (buffer) -> console.log buffer.toString()
     #proc.stdout.on  'data', (buffer) -> console.log buffer.toString()
     proc.on         'exit', (status) -> process.exit(1) if status isnt 0
-  runCommand 'cat', './misc/header.js', './lib/expandol.js', '>', './lib/index.js'
+  runCommand 'cat', './misc/header.js', './lib/elongate.js', '>', './lib/index.js'
 
 

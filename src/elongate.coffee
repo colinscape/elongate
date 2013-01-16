@@ -47,15 +47,15 @@ internal = (short_url, history, cb) ->
 #============================================================================
 
 # The function we expose.
-expandol = (short_url, cb) ->
+elongate = (short_url, cb) ->
   return internal short_url, [], cb
 
 #============================================================================
 
-module.exports = expandol
+module.exports = elongate
 
 if not module.parent?
   short_url = process.argv[2]
-  expandol short_url, (err, destination_url, all_urls) ->
+  elongate short_url, (err, destination_url, all_urls) ->
     if err? then return console.log "ERROR: #{err}"
     console.log destination_url
