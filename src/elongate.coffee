@@ -28,15 +28,18 @@ internal = (short_url, history, cb) ->
       'User-Agent': userAgent
     url: parsed_url
 
-  request.get options, (err, resp, body) ->
+  request.get options, (err, resp, body) =>
 
     if err? then return cb err
 
     # If we are to redirect, go recursive.
     if resp.statusCode >= 300 and resp.statusCode < 400
       location = resp.headers.location
-      if location in history then return cb "Redirect loop"
-      return internal location, history, cb
+
+      redirect_url = url.resolve parsed_url, location
+
+      if redirect_url in history then return cb "Redirect loop"
+      return internal redirect_url, history, cb
 
     # We get here, we are at the end of the redirections.
     destination_url = resp.request.href
